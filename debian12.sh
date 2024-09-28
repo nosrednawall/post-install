@@ -6,24 +6,24 @@ echo "Will Create folders  pattern in portuguese"
 mkdir -p /home/$USER/{Desktop,Downloads,Documentos,git,Imagens/Screenshoots,Músicas,.lyrics,.programas,.appimage}
 
 echo "install git"
-sudo apt install -y git aptitude htop pv lm-sensors stow xserver-xorg curl
+sudo apt install -y git stow
 
 # Instalando suckless build
 echo "Instalando suckless build..."
 
 # DWM debian
 sudo apt install -y make gcc build-essential libx11-dev libxft-dev libxinerama-dev  \
-    libharfbuzz-dev  libimlib2-dev libxrandr-dev libxcb-res0-dev libx11-xcb-dev
+    libharfbuzz-dev  libimlib2-dev libxrandr-dev libxcb-res0-dev libx11-xcb-dev libxcb-util0-dev
 
 # dwm
 git clone https://github.com/nosrednawall/suckless.git ~/.config/suckless
 cd ~/.config/suckless/dwm
 sudo make clean install
 
-# Copy autostart dwm
-mkdir -p ~/.local/share/dwm
-cp autostart.sh ~/.local/share/dwm/
-cp autostart_blocking.sh ~/.local/share/dwm/
+# Copy autostart dwm - I have this files in dotfiles repository
+#mkdir -p ~/.local/share/dwm
+#cp autostart.sh ~/.local/share/dwm/
+#cp autostart_blocking.sh ~/.local/share/dwm/
 
 # Copy desktop laucher for session manager
 sudo cp dwm.desktop /usr/share/xsessions
@@ -42,7 +42,7 @@ sudo make clean install
 
 # Dependencias para o ambiente
 # Programs
-sudo apt install -y picom rofi network-manager dunst xdotool copyq xautolock feh libnotify-bin \
+sudo apt install -y aptitude xserver-xorg curl htop pv lm-sensors picom rofi network-manager dunst xdotool copyq xautolock \feh libnotify-bin \
     pinentry-gnome3 ssh-askpass-gnome
 
 # Drivers nvidia
@@ -50,7 +50,8 @@ install_drivers_nvidia() {
     echo "Instalando drivers nvidia"
     # Driver Nvidia
     sudo apt install -y dkms linux-headers-amd64 firmware-misc-nonfree
-    sudo apt install -y nvidia-driver nvidia-xconfig xserver-xorg-video-amdgpu nvidia-cuda-dev nvidia-cuda-toolkit libnvidia-encode1
+    sudo apt install -y nvidia-driver nvidia-xconfig xserver-xorg-video-amdgpu \
+        nvidia-cuda-dev nvidia-cuda-toolkit libnvidia-encode1
     # sudo reboot
     sudo nvidia-xconfig --prime
 
@@ -59,13 +60,15 @@ install_drivers_nvidia() {
 # Drivers amd
 install_drivers_amd() {
     echo "Instalando drivers amd"
-    sudo apt install -y firmware-amd-graphics libgl1-mesa-dri libglx-mesa0 mesa-vulkan-drivers xserver-xorg-video-all
+    sudo apt install -y firmware-amd-graphics libgl1-mesa-dri libglx-mesa0 \
+        mesa-vulkan-drivers xserver-xorg-video-all
 }
 
 # Drivers Intel
 install_drivers_intel() {
     echo "Instalando drivers intel"
-    sudo apt install -y xserver-xorg-video-intel libgl1-mesa-dri libglx-mesa0 mesa-vulkan-drivers xserver-xorg-video-all
+    sudo apt install -y xserver-xorg-video-intel libgl1-mesa-dri libglx-mesa0 \
+        mesa-vulkan-drivers xserver-xorg-video-all
 }
 
 # Funcao para o usuario escolher qual drive de vídeo quer instalar
@@ -134,13 +137,16 @@ choise_laptop_acer
 sudo systemctl enable lightdm.service
 
 # Appearence
-sudo apt install -y numix-icon-theme-circle papirus-icon-theme lxappearance qt5ct qt5-style-plugins
+sudo apt install -y numix-icon-theme-circle papirus-icon-theme lxappearance \
+    qt5ct qt5-style-plugins
 
 # File manager
-sudo apt install -y thunar ranger thunar-archive-plugin thunar-media-tags-plugin gvfs-backends gvfs-bin smbclient samba
+sudo apt install -y thunar ranger thunar-archive-plugin thunar-media-tags-plugin \
+    gvfs-backends gvfs smbclient samba
 
 # extracao de arquivos
-sudo apt install -y arc arj cabextract lhasa p7zip p7zip-full p7zip-rar rar unrar unace unzip xz-utils zip xarchiver
+sudo apt install -y arc arj cabextract lhasa p7zip p7zip-full p7zip-rar rar \
+    unrar unace unzip xz-utils zip xarchiver
 
 # Battery
 sudo apt install -y xfce4-power-manager tlp
@@ -240,6 +246,5 @@ git clone https://github.com/nosrednawall/dotfiles ~/.dotfiles/
 
 cd ~/.dotfiles
 stow .
-
 
 echo "All installations completed."
