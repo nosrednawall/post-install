@@ -13,7 +13,7 @@ echo "Instalando suckless build..."
 
 # DWM debian
 sudo apt install -y make gcc build-essential libx11-dev libxft-dev libxinerama-dev  \
-    libharfbuzz-dev  libimlib2-dev libxrandr-dev libxcb-res0-dev
+    libharfbuzz-dev  libimlib2-dev libxrandr-dev libxcb-res0-dev libx11-xcb-dev
 
 # dwm
 git clone https://github.com/nosrednawall/suckless.git ~/.config/suckless
@@ -236,9 +236,10 @@ choise_term_program(){
 choise_term_program
 
 echo "cloning dotfiles"
-git clone https://github.com/nosrednawall/dotfiles .dotfiles
+git clone https://github.com/nosrednawall/dotfiles ~/.dotfiles/
 
-cd .dotfiles && stow .
+cd ~/.dotfiles
+stow .
 
 
 echo "All installations completed."
