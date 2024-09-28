@@ -18,6 +18,9 @@ sudo apt install -y make gcc build-essential libx11-dev libxft-dev libxinerama-d
 # dwm
 git clone https://github.com/nosrednawall/suckless.git ~/.config/suckless
 cd ~/.config/suckless/dwm
+mkdir -p ~/.fonts
+cp fonts/* ~/.fonts/
+fc-cache -fvr
 sudo make clean install
 
 # Copy autostart dwm - I have this files in dotfiles repository
