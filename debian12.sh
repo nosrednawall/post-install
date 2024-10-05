@@ -6,7 +6,10 @@ echo "Will Create folders  pattern in portuguese"
 mkdir -p /home/$USER/{Desktop,Downloads,Documentos,git,Imagens/Screenshoots,Músicas,.lyrics,.programas,.appimage}
 
 echo "install git"
-sudo apt install -y git stow
+sudo apt install -y git stow timeshift
+
+# Create backup in timeshift
+sudo timeshift --create --comments "First, before install suckless programs"
 
 # Instalando suckless build
 echo "Instalando suckless build..."
@@ -43,9 +46,12 @@ sudo make clean install
 cd ../slock
 sudo make clean install
 
+# create backup in timeshift
+sudo timeshift --create --comments "before install drivers"
+
 # Dependencias para o ambiente
 # Programs
-sudo apt install -y aptitude xserver-xorg curl htop pv lm-sensors picom rofi network-manager dunst xdotool copyq xautolock \feh libnotify-bin \
+sudo apt install -y aptitude xserver-xorg curl htop pv lm-sensors picom rofi network-manager dunst xdotool copyq xautolock feh libnotify-bin \
     pinentry-gnome3 ssh-askpass-gnome
 
 # Drivers nvidia
@@ -131,6 +137,10 @@ EOF
             ;;
     esac
 
+    # Battery
+    sudo apt install -y xfce4-power-manager tlp
+    sudo systemctl enable --now tlp
+
     # Adding a couple of line returns
     echo -e "\n\n"
 }
@@ -151,9 +161,11 @@ sudo apt install -y thunar ranger thunar-archive-plugin thunar-media-tags-plugin
 sudo apt install -y arc arj cabextract lhasa p7zip p7zip-full p7zip-rar rar \
     unrar unace unzip xz-utils zip xarchiver
 
-# Battery
-sudo apt install -y xfce4-power-manager tlp
-sudo systemctl enable --now tlp
+# Bluetooth
+sudo apt install blueman bluez bluez-firmware
+
+# Conky
+sudo apt install conky-all
 
 # Brightness
 sudo apt install -y brightnessctl redshift
@@ -212,6 +224,26 @@ sudo apt install -y ./google-chrome-stable_current_amd64.deb
 sudo apt install -f -y
 rm -rf google-chrome-stable_current_amd64.deb
 
+# Flatpak
+sudo apt install flatpak
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+flatpak install  ch.openboard.OpenBoard
+flatpak install  com.bitwarden.desktop
+flatpak install  com.discordapp.Discord
+flatpak install  com.github.KRTirtho.Spotube
+flatpak install  com.github.d4nj1.tlpui
+flatpak install  com.github.tchx84.Flatseal
+flatpak install  com.obsproject.Studio
+flatpak install  io.dbeaver.DBeaverCommunity
+flatpak install  io.freetubeapp.FreeTube
+flatpak install  io.github.flattool.Warehouse
+flatpak install  md.obsidian.Obsidian
+flatpak install  org.filezillaproject.Filezilla
+flatpak install  org.jupyter.JupyterLab
+flatpak install  org.mozilla.Thunderbird
+flatpak install  org.telegram.desktop
+
+
 choise_term_program(){
     echo "Select your sound software prefer:"
     echo "1. OhMyBash"
@@ -249,5 +281,13 @@ git clone https://github.com/nosrednawall/dotfiles ~/.dotfiles/
 
 cd ~/.dotfiles
 stow .
+
+# emacs and doom emacs
+sudo apt install emacs-lucid ripgrep fd-find findutils
+git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.config/emacs
+~/.config/emacs/bin/doom install
+
+# create backup in timeshift
+sudo timeshift --create --comments "after install all"
 
 echo "All installations completed."
