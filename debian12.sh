@@ -162,10 +162,10 @@ sudo apt install -y arc arj cabextract lhasa p7zip p7zip-full p7zip-rar rar \
     unrar unace unzip xz-utils zip xarchiver
 
 # Bluetooth
-sudo apt install blueman bluez bluez-firmware
+sudo apt install -y blueman bluez bluez-firmware
 
 # Conky
-sudo apt install conky-all
+sudo apt install -y conky-all
 
 # Brightness
 sudo apt install -y brightnessctl redshift
@@ -183,7 +183,7 @@ choise_sound_program(){
             sudo apt install -y pulseaudio pavucontrol pamixer
             ;;
         2)
-            sudo apt install pipewire pipewire-pulse wireplumber pipewire-media-session pulsemixer
+            sudo apt install -y pipewire pipewire-pulse wireplumber pipewire-media-session pulsemixer
             systemctl --user --now enable wireplumber.service
             ;;
         *)
@@ -225,23 +225,23 @@ sudo apt install -f -y
 rm -rf google-chrome-stable_current_amd64.deb
 
 # Flatpak
-sudo apt install flatpak
+sudo apt install -y flatpak
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-flatpak install  ch.openboard.OpenBoard
-flatpak install  com.bitwarden.desktop
-flatpak install  com.discordapp.Discord
-flatpak install  com.github.KRTirtho.Spotube
-flatpak install  com.github.d4nj1.tlpui
-flatpak install  com.github.tchx84.Flatseal
-flatpak install  com.obsproject.Studio
-flatpak install  io.dbeaver.DBeaverCommunity
-flatpak install  io.freetubeapp.FreeTube
-flatpak install  io.github.flattool.Warehouse
-flatpak install  md.obsidian.Obsidian
-flatpak install  org.filezillaproject.Filezilla
-flatpak install  org.jupyter.JupyterLab
-flatpak install  org.mozilla.Thunderbird
-flatpak install  org.telegram.desktop
+flatpak install  ch.openboard.OpenBoard -y
+flatpak install  com.bitwarden.desktop -y
+flatpak install  com.discordapp.Discord -y
+flatpak install  com.github.KRTirtho.Spotube  -y
+flatpak install  com.github.d4nj1.tlpui  -y
+flatpak install  com.github.tchx84.Flatseal -y
+flatpak install  com.obsproject.Studio  -y
+flatpak install  io.dbeaver.DBeaverCommunity  -y
+flatpak install  io.freetubeapp.FreeTube  -y
+flatpak install  io.github.flattool.Warehouse  -y
+flatpak install  md.obsidian.Obsidian  -y
+flatpak install  org.filezillaproject.Filezilla  -y
+flatpak install  org.jupyter.JupyterLab  -y
+flatpak install  org.mozilla.Thunderbird  -y
+flatpak install  org.telegram.desktop  -y
 
 
 choise_term_program(){
@@ -283,7 +283,7 @@ cd ~/.dotfiles
 stow .
 
 # emacs and doom emacs
-sudo apt install emacs-lucid ripgrep fd-find findutils
+sudo apt install -y emacs-lucid ripgrep fd-find findutils
 git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.config/emacs
 ~/.config/emacs/bin/doom install
 
