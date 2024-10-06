@@ -52,7 +52,7 @@ sudo timeshift --create --comments "before install drivers"
 # Dependencias para o ambiente
 # Programs
 sudo apt install -y aptitude xserver-xorg curl htop pv lm-sensors picom rofi network-manager dunst xdotool copyq xautolock feh libnotify-bin \
-    pinentry-gnome3 ssh-askpass-gnome
+    pinentry-gnome3 ssh-askpass-gnome lxpolkit
 
 # Drivers nvidia
 install_drivers_nvidia() {
